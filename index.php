@@ -108,7 +108,8 @@ function __autoload($className){
         ROOT."/lib/",
         ROOT."/site/controller/",
         ROOT."/admin/controller/",
-        ROOT."/common/"
+        ROOT."/common/",
+        ROOT."/common/model/"
     );
     foreach($paths as $path){
         if(file_exists($path.$className.".class.php")){
