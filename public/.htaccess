@@ -1,7 +1,6 @@
-<ifmodule mod_rewrite.so>
- RewriteEngine On
- RewriteCond %{REQUEST_FILENAME} !-f
- RewriteCond %{REQUEST_FILENAME} !-d
- RewriteCond %{REQUEST_FILENAME} !-l
- RewriteRule ^(.*)$ index.php?url=$1 [QSA,PT,L]
-</ifmodule>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,PT,L]
+RewriteRule ^post/(\d+) index.php?url=post&id=$1 [L]

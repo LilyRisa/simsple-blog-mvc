@@ -52,9 +52,8 @@ function endHeader(){
  * Get footer
  */
 function componentMenu($array){
-    $title = $array['title'];
-    $menu = $array['menu'];
-    $count = count($array['menu']);
+    $title = $array;
+    $menu = Menu::getAll();
 
     $template = sprintf('<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
@@ -65,9 +64,9 @@ function componentMenu($array){
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">',$title['link'],$title['text']);
-        for($i=0;$i<$count;$i++){
+        foreach($menu as $menu){
             $template .= '<li class="nav-item">
-            <a class="nav-link" href="'.$menu[$i]['link'].'">'.$menu[$i]['text'].'</a>
+            <a class="nav-link" href="menu@'.$menu->getColumnValue('id').'">'.$menu->getColumnValue('name').'</a>
           </li>';
         }
         $template .= '</ul>

@@ -11,27 +11,9 @@ class HomeController extends Controller {
     function index(){
         $this->setView('', 'main');
         $menu2 = Menu::getAll();
-        for($i=0 ; $i < count($menu2) ; $i++){
-			$data_menu += [
-				'link' => 'about',
-				'text' => $menu2[$i]->getColumnValue('name')
-			];
-		}
-        
-        	$menu = [
-				'title' => [
-					'link' => 'home',
-					'text' => 'Demo blog'
-				],
-				'menu' => [
-					
-					$data_menu
-				]
-			];
-        
-        
-		
-		// var_dump($menu2[0]->getColumnValue('id'));
+
+       $menu = ['link' => 'home','text' => 'Demo blog'];
+
 
 		$heading = [
 			'background' => staticfile('site/images/home-bg.jpg'),
@@ -40,7 +22,7 @@ class HomeController extends Controller {
 		];
 		$footer = [
 			'twitter' => '#',
-			'facebook' => '#',
+			'facebook' => 'https://www.facebook.com/dark.knight.os',
 			'github' => '#',
 			'text' => 'Copyright © Your Website 2020'
 		];

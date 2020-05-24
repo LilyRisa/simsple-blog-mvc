@@ -10,13 +10,19 @@ componentMenu($menu);
 componentHeader($textheading);
 
 $post =  Post::getAll();
-
 ?>
   <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <?php foreach ($post as $post) { ?>
+        <?php foreach ($post as $post) { 
+
+          if($id != null && $id == $post->getColumnValue('cate_post')){
+
+
+
+
+          ?>
        
         <div class="post-preview">
           <a href="post@<?= $post->getColumnValue('id') ?>">
@@ -31,6 +37,7 @@ $post =  Post::getAll();
         </div>
         <hr>
         <?php
+      }
           } 
         ?>
         <!-- Pager -->

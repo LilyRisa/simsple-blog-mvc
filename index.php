@@ -1,5 +1,6 @@
 <?php
 define('ROOT',dirname(realpath(__FILE__))."/");
+define('STATICFILE',dirname(realpath(__FILE__))."/public");
 
 
 $thisDir=explode("/", ROOT);
@@ -67,27 +68,34 @@ function callHook() {
     global $url;
     global $area;
     $url = rtrim($url,"/");
+    // $url = rtrim($url,"@");
     $urlArray = array();
     $urlArray = explode("/",$url);
+    $urlArray2 = explode("@",$url);
     $controller = DEFAULT_CONROLLER;
     $action = DEFAULT_ACTION;
-    // var_dump($urlArray);
+    if(isset($urlArray2[1])){
+        $urlArray = array($urlArray2[0]);
+        $_SESSION['byid'] = $urlArray2[1];
+    }
+    // var_dump($_SESSION['byid']);
+    // if(isset($urlArray[1])){
+    //     $byid = $urlArray[1];
+    // }
+    
     //Check if the call is to admin area
     if($urlArray[0] == "admin"){
         $area = "admin";
         array_shift($urlArray);
     }
-    //Controller
+
     if(isset($urlArray[0]) && !empty($urlArray[0])){
         $controller = array_shift($urlArray);
     }
     //Action
     if(isset($urlArray[0]) && !empty($urlArray[0])){
         $action = array_shift($urlArray);
-    }
-    
-    
-    
+    }    
     //LOAD THE CONTROLLER
     $controllerName = $controller;
     $controller = ucwords($controller);
@@ -95,7 +103,6 @@ function callHook() {
     $controller .= 'Controller';
     $dispatch = new $controller();
     
-    // echo $area . "-->".$controller."--->".$action;
     
     if ((int)method_exists($controller, $action)) {
         call_user_func(array($dispatch,$action));
@@ -109,7 +116,8 @@ function __autoload($className){
         ROOT."/site/controller/",
         ROOT."/admin/controller/",
         ROOT."/common/",
-        ROOT."/common/model/"
+        ROOT."/common/model/",
+        ROOT."/lib/service/"
     );
     foreach($paths as $path){
         if(file_exists($path.$className.".class.php")){
