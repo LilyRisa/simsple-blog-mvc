@@ -17,7 +17,7 @@ class HomeController extends Controller {
 
 		$heading = [
 			'background' => staticfile('site/images/home-bg.jpg'),
-			'heading' => 'Bui Van Minh',
+			'heading' => "I'm developer - Brons99",
 			'subheading' => 'depteaivcl hahahaahahah'
 		];
 		$footer = [

@@ -4,6 +4,7 @@ setTitle('Simple page title');
 includeStyle('bootstrap.min.css');
 includeStyle('clean-blog.css');
 includeStyle('clean-blog.min.css');
+includeExternalScript('https://kit.fontawesome.com/395a09f10a.js');
 endHeader();
 
 componentMenu($menu);

@@ -20,7 +20,23 @@ class Controller {
     protected function setVariable($key,$value){
         $this->template->setVariable($key,$value);
     }
-    
+
+    protected function Auth($data=null){
+        if($data != null){
+            $embb = $data->getColumnValue('username');
+            return $_SESSION['username'] = $embb;
+        }else{
+            if(isset($_SESSION['username'])){
+                return $_SESSION['username'];
+            }else{
+                return null;
+            }
+            
+        }
+        
+        
+    }
+
     function __destruct(){
         $this->template->render();
     }

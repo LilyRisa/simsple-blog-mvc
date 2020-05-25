@@ -22,6 +22,9 @@ class Model {
     /**
      * Save or update the item data in database
      */
+    function count(){
+        return count($this->columns);
+    }
     function getId(){
         return $this->getColumnValue('id');
     }
@@ -136,7 +139,10 @@ class Model {
         $row = $s->fetch(PDO::FETCH_ASSOC);
         $className = get_called_class();
         $item = new $className();
-        $item->createFromDb($row);
+        if(!empty($row) || $row != NULL){
+            $item->createFromDb($row);
+        }
+        
         return $item;
     }
     

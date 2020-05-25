@@ -9,6 +9,14 @@ function startHeader(){
 /**
  * Include a stylesheet from the css folder
  */
+function mixstyle($data){
+  echo '<style>'.$data.'</style>';
+}
+
+function mixscript($data){
+  echo '<script>'.$data.'</script>';
+}
+
 function includeStyle($filename){
     global $area;
     $path = "./".$area."/css/".$filename;
@@ -33,7 +41,7 @@ function includeScript($filename){
  * Inlcude an external javascript
  */
 function includeExternalScript($location){
-    $string = "<script type='text/css' src='".$location."'></script>\n";
+    $string = "<script type='text/javascript' src='".$location."'></script>\n";
     echo $string;
 }
 /**
@@ -56,6 +64,7 @@ function componentMenu($array){
     $menu = Menu::getAll();
 
     $template = sprintf('<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      
     <div class="container">
       <a class="navbar-brand" href="%s">%s</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +72,9 @@ function componentMenu($array){
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">',$title['link'],$title['text']);
+        <ul class="navbar-nav ml-auto">
+            
+        ',$title['link'],$title['text']);
         foreach($menu as $menu){
             $template .= '<li class="nav-item">
             <a class="nav-link" href="menu@'.$menu->getColumnValue('id').'">'.$menu->getColumnValue('name').'</a>
@@ -72,6 +83,15 @@ function componentMenu($array){
         $template .= '</ul>
       </div>
     </div>
+        <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="student">Xem điểm sinh viên</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="teacher">Khu vực giáo viên</a>
+              </li>
+        </ul>
+
   </nav>';
   echo $template;
 }

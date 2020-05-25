@@ -2,6 +2,7 @@
 define('ROOT',dirname(realpath(__FILE__))."/");
 define('STATICFILE',dirname(realpath(__FILE__))."/public");
 
+// require __DIR__ . '/vendor/autoload.php';
 
 $thisDir=explode("/", ROOT);
 $conflen=strlen(array_pop($thisDir));
@@ -14,6 +15,7 @@ $host='http://' . $_SERVER['SERVER_NAME'] . '/' . $D;
 define('ROOT_URL', $host);
 include(ROOT . 'system/config/config.php');
 include(ROOT . 'lib/functions.php');
+include(ROOT . 'lib/service/service.php');
 /**
  * Set error reporting
  */
@@ -51,18 +53,30 @@ function removeMagicQuotes() {
     }
 }
 /** Check register globals and remove them **/
-function unregisterGlobals() {
-    if (ini_get('register_globals')) {
-        $array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
-        foreach ($array as $value) {
-            foreach ($GLOBALS[$value] as $key => $var) {
-                if ($var === $GLOBALS[$key]) {
-                    unset($GLOBALS[$key]);
-                }
-            }
-        }
-    }
-}
+// function unregisterGlobals() {
+//     if (ini_get('register_globals')) {
+//         $array = array( '_POST', '_GET', '_REQUEST', '_SERVER', '_ENV', '_FILES');
+//         foreach ($array as $value) {
+//             foreach ($GLOBALS[$value] as $key => $var) {
+//                 if ($var === $GLOBALS[$key]) {
+//                     unset($GLOBALS[$key]);
+//                 }
+//             }
+//         }
+//     }
+// }
+// function unregisterSessionCookie() {
+//     if (ini_get('register_globals')) {
+//         $array = array('_SESSION', '_COOKIE');
+//         foreach ($array as $value) {
+//             foreach ($GLOBALS[$value] as $key => $var) {
+//                 if ($var === $GLOBALS[$key]) {
+//                     unset($GLOBALS[$key]);
+//                 }
+//             }
+//         }
+//     }
+// }
 /** Main Call Function **/
 function callHook() {
     global $url;
@@ -129,5 +143,5 @@ function __autoload($className){
 $area = "site";
 setErrorLogging();
 removeMagicQuotes();
-unregisterGlobals();
+// unregisterGlobals();
 callHook();
