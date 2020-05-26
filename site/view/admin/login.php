@@ -94,7 +94,7 @@ mixscript('AOS.init();');
       }).done((result)=>{
         result = JSON.parse(result);
           if(result.status == true){
-            // location.reload();
+            location.reload();
             console.log(result);
           }else{
             console.log(result);

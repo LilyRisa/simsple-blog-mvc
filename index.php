@@ -15,6 +15,7 @@ $host='http://' . $_SERVER['SERVER_NAME'] . '/' . $D;
 define('ROOT_URL', $host);
 include(ROOT . 'system/config/config.php');
 include(ROOT . 'lib/functions.php');
+include(ROOT . 'lib/service/SessionControl.php');
 include(ROOT . 'lib/service/service.php');
 /**
  * Set error reporting
@@ -29,6 +30,26 @@ function setErrorLogging(){
     }
     ini_set('log_errors', "1");
     ini_set('error_log',ROOT . 'system/log/error_log.php');
+}
+
+function SetStorage($data){
+    $return = true;
+    try{
+        $myfile = fopen(ROOT."system/log/auth.json", "w");
+        $txt = json_encode($data);
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }catch(Exception $e){
+        $return = false;
+    }
+    return $return;
+    
+}
+function GetStorage(){
+   $content = file_get_contents(ROOT.'system/log/auth.json');
+   $content = json_decode($content);
+   return $content;
+    
 }
 /**
  * Trace function which outputs variables to system/log/output.php file
@@ -142,6 +163,6 @@ function __autoload($className){
 }
 $area = "site";
 setErrorLogging();
-removeMagicQuotes();
+// removeMagicQuotes();
 // unregisterGlobals();
 callHook();

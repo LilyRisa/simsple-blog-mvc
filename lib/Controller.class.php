@@ -22,19 +22,31 @@ class Controller {
     }
 
     protected function Auth($data=null){
+
         if($data != null){
-            $embb = $data->getColumnValue('username');
-            return $_SESSION['username'] = $embb;
-        }else{
-            if(isset($_SESSION['username'])){
-                return $_SESSION['username'];
+            $pass = md5($data['password'].'s4lt$t61N9');
+            $username = $data['username'];
+            $user =  Teacher::getOne(['username' => $username, 'pass' => $pass]);
+            if($user->count() != 0){
+                SetStorage($data);
+                return true;
             }else{
-                return null;
+                return false;
             }
+        }else{
+           $auth = GetStorage();
+           if($auth != null){
+            return true;
+           }else{
+            return false;
+           }
             
         }
         
         
+    }
+    protected function AuthOut(){
+        SetStorage([]);
     }
 
     function __destruct(){

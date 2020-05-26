@@ -25,6 +25,14 @@ function includeStyle($filename){
 /**
  * Include an external stylesheet from another domain
  */
+function includeTemplate($path='',$file,$variable=[]){
+    global $area;
+    extract($variable);
+    $filename = ROOT.$area."/view/".$path."/".$file.".php";
+      if(file_exists($filename)){
+          include($filename);
+      }
+}
 function includeExternalStyle($location){
     $string = "<link rel='stylesheet' type='text/css' href='".$location."' />\n";
     echo $string;

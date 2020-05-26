@@ -28,6 +28,7 @@ class Model {
     function getId(){
         return $this->getColumnValue('id');
     }
+
     
     function save(){
         $class = get_called_class();
@@ -101,6 +102,7 @@ class Model {
         }
         $s->execute($condition);
         $result = $s->fetchAll(PDO::FETCH_ASSOC);
+        $number_of_rows = ['count' => $s->rowCount()]; 
         $collection = array();
         $className = get_called_class();
         foreach($result as $row){
@@ -108,6 +110,7 @@ class Model {
             $item->createFromDb($row);
             array_push($collection,$item);
         }
+        // array_push($collection,$number_of_rows);
         return $collection;
     }
     
