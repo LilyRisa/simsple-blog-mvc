@@ -394,3 +394,40 @@ Stack trace:
 #1 D:\xampp\htdocs\mvc_tutorial\public\index.php(3): require_once('D:\\xampp\\htdocs...')
 #2 {main}
   thrown in D:\xampp\htdocs\mvc_tutorial\index.php on line 139
+[28-May-2020 19:30:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class 'SiteController' not found in D:\xampp\htdocs\mvc_tutorial\index.php:139
+Stack trace:
+#0 D:\xampp\htdocs\mvc_tutorial\index.php(168): callHook()
+#1 D:\xampp\htdocs\mvc_tutorial\public\index.php(3): require_once('D:\\xampp\\htdocs...')
+#2 {main}
+  thrown in D:\xampp\htdocs\mvc_tutorial\index.php on line 139
+[28-May-2020 19:48:56 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class 'FindController' not found in D:\xampp\htdocs\mvc_tutorial\index.php:139
+Stack trace:
+#0 D:\xampp\htdocs\mvc_tutorial\index.php(168): callHook()
+#1 D:\xampp\htdocs\mvc_tutorial\public\index.php(3): require_once('D:\\xampp\\htdocs...')
+#2 {main}
+  thrown in D:\xampp\htdocs\mvc_tutorial\index.php on line 139
+[28-May-2020 19:54:03 Europe/Berlin] PHP Parse error:  syntax error, unexpected 't' (T_STRING), expecting ',' or ')' in D:\xampp\htdocs\mvc_tutorial\site\view\find.php on line 20
+[28-May-2020 20:21:24 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class 'Bùi Văn MinhController' not found in D:\xampp\htdocs\mvc_tutorial\index.php:139
+Stack trace:
+#0 D:\xampp\htdocs\mvc_tutorial\index.php(168): callHook()
+#1 D:\xampp\htdocs\mvc_tutorial\public\index.php(3): require_once('D:\\xampp\\htdocs...')
+#2 {main}
+  thrown in D:\xampp\htdocs\mvc_tutorial\index.php on line 139
+[28-May-2020 22:00:51 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class 'ImgController' not found in D:\xampp\htdocs\mvc_tutorial\index.php:139
+Stack trace:
+#0 D:\xampp\htdocs\mvc_tutorial\index.php(168): callHook()
+#1 D:\xampp\htdocs\mvc_tutorial\public\index.php(3): require_once('D:\\xampp\\htdocs...')
+#2 {main}
+  thrown in D:\xampp\htdocs\mvc_tutorial\index.php on line 139
+[28-May-2020 22:01:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class 'ImgController' not found in D:\xampp\htdocs\mvc_tutorial\index.php:139
+Stack trace:
+#0 D:\xampp\htdocs\mvc_tutorial\index.php(168): callHook()
+#1 D:\xampp\htdocs\mvc_tutorial\public\index.php(3): require_once('D:\\xampp\\htdocs...')
+#2 {main}
+  thrown in D:\xampp\htdocs\mvc_tutorial\index.php on line 139
+[29-May-2020 03:41:17 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class 'ImgController' not found in D:\xampp\htdocs\mvc_tutorial\index.php:139
+Stack trace:
+#0 D:\xampp\htdocs\mvc_tutorial\index.php(168): callHook()
+#1 D:\xampp\htdocs\mvc_tutorial\public\index.php(3): require_once('D:\\xampp\\htdocs...')
+#2 {main}
+  thrown in D:\xampp\htdocs\mvc_tutorial\index.php on line 139

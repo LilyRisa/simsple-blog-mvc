@@ -17,7 +17,7 @@ class TeacherController extends Controller {
 
     	$footer = [
 			'twitter' => '#',
-			'facebook' => 'https://www.facebook.com/dark.knight.os',
+			'facebook' => 'https://www.facebook.com/CLBTinHocTDU',
 			'github' => '#',
 			'text' => 'Copyright © Your Website 2020'
 		];

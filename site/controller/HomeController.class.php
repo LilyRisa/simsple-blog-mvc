@@ -12,17 +12,17 @@ class HomeController extends Controller {
         $this->setView('', 'main');
         $menu2 = Menu::getAll();
 
-       $menu = ['link' => 'home','text' => 'Demo blog'];
+       $menu = ['link' => 'home','text' => 'TDU'];
 
 
 		$heading = [
-			'background' => staticfile('site/images/home-bg.jpg'),
-			'heading' => "I'm developer - Brons99",
-			'subheading' => 'depteaivcl hahahaahahah'
+			'background' => staticfile('site/images/tdu.jpeg'),
+			'heading' => "Chân - chính - chuyên - chất",
+			'subheading' => 'HỌC ĐỂ BIẾT, HỌC ĐỂ LÀM, HỌC ĐỂ CHUNG SỐNG, HỌC ĐỂ KHẲNG ĐỊNH MÌNH'
 		];
 		$footer = [
 			'twitter' => '#',
-			'facebook' => 'https://www.facebook.com/dark.knight.os',
+			'facebook' => 'https://www.facebook.com/CLBTinHocTDU',
 			'github' => '#',
 			'text' => 'Copyright © Your Website 2020'
 		];

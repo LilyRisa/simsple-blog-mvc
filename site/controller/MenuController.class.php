@@ -27,19 +27,19 @@ class MenuController extends Controller {
 			
 		}
         
-        	$menu = ['link' => 'home','text' => 'Demo blog'];
+        	$menu = ['link' => 'home','text' => 'TDU'];
        
 		
 		// var_dump($menu2[0]->getColumnValue('id'));
 
 		$heading = [
-			'background' => staticfile('site/images/home-bg.jpg'),
+			'background' => staticfile('site/images/tdu.jpeg'),
 			'heading' => Menu::getOne(['id' => $id])->getColumnValue('name'),
 			'subheading' => ''
 		];
 		$footer = [
 			'twitter' => '#',
-			'facebook' => 'https://www.facebook.com/dark.knight.os',
+			'facebook' => 'https://www.facebook.com/CLBTinHocTDU',
 			'github' => '#',
 			'text' => 'Copyright © Your Website 2020'
 		];

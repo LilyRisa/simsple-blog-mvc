@@ -93,7 +93,7 @@ function componentMenu($array){
     </div>
         <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="student">Xem điểm sinh viên</a>
+                  <a class="nav-link" href="find">Xem điểm sinh viên</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="teacher">Khu vực giáo viên</a>
@@ -112,7 +112,7 @@ function componentHeader($array){
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>%s</h1>
+            <h1 style="font-size: 50px;">%s</h1>
             <span class="subheading">%s</span>
           </div>
         </div>
