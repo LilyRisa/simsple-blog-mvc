@@ -11,7 +11,8 @@ class FindController extends Controller {
     function index(){
         $this->setView('', 'find');
         $menu2 = Menu::getAll();
-
+        $subject = new Subject();
+        $subject = $subject->getAll();
        $menu = ['link' => 'home','text' => 'TDU'];
 
 
@@ -28,7 +29,9 @@ class FindController extends Controller {
 		];
 		// $post = Post::getAll();
 		// echo $post;
+
         $this->setVariable('menu', $menu);
+        $this->setVariable('subject', $subject);
         $this->setVariable('textheading', $heading);
         $this->setVariable('footer', $footer);
     }
@@ -36,27 +39,31 @@ class FindController extends Controller {
     function search(){
     	$text = $_POST['text'];
     	$student = Student::getOne(['masv' => $_POST['text']]);
-    	$point = Point::getOne(['student_id' => $student->getColumnValue('id')]);
+    	$subject = new Subject();
+    	$point = Point::getAll(['student_id' => $student->getColumnValue('id')]);
+    	$count = Point::getCount(['student_id' => $student->getColumnValue('id')]);
 
     	$st = [
+    		'id' => $student->getColumnValue('id'),
     		'masv' => $student->getColumnValue('masv'),
     		'fullname' => $student->getColumnValue('fullname'),
     		'birthday' => $student->getColumnValue('birthday'),
     		'image' => $student->getColumnValue('image'),
     		'location' => $student->getColumnValue('location'),
     	];
-    	$p = [
-    		'cnpm' => $point->getColumnValue('cnpm').' '.pointAlpha($point->getColumnValue('cnpm')),
-    		'ttnt' => $point->getColumnValue('ttnt').' '.pointAlpha($point->getColumnValue('ttnt')),
-    		'qtm' => $point->getColumnValue('qtm').' '.pointAlpha($point->getColumnValue('qtm')),
-    		'tanc' => $point->getColumnValue('tanc').' '.pointAlpha($point->getColumnValue('tanc')),
-    		'csdl' => $point->getColumnValue('csdl').' '.pointAlpha($point->getColumnValue('csdl')),
-    		'btht' => $point->getColumnValue('btht').' '.pointAlpha($point->getColumnValue('btht')),
-    	];
-
+    	// $p = [];
+    	// // for($i=0; $i<$count; $i++){
+    	// // 	$p[$i] = [
+    	// // 		'name' => $subject->getOne(['id' => $point[$i]->getColumnValue('point_id')])->getColumnValue('name'),
+    	// // 		'value' => $point[$i]->getColumnValue('value_point')
+    	// // ];
+    	// // }
+    	// foreach ($variable as $key => $value) {
+    	// 	# code...
+    	// }
+    	// var_dump($p);
     	$data = [
     		'student' => $st,
-    		'point' => $p
     	];
     	echo json_encode($data);
 

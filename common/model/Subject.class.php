@@ -3,9 +3,9 @@
 /**
  * 
  */
-class Point extends Model
+class Subject extends Model
 {
-	protected static $tableName = 'st_point';
+	protected static $tableName = 'list_point';
     protected static $primaryKey = 'id';
 	
 	

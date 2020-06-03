@@ -49,6 +49,11 @@
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Quản lý điểm</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="subject">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Quản lý môn</span></a>
+      </li>
 
       <!-- Nav Item - Tables -->
  

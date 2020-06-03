@@ -46,25 +46,8 @@ mixscript('AOS.init();');
               <form action="">
                   <div class="form-group">
                     <label for="masv">Mã sinh viên:</label>
-                    <!-- <input type="text" class="form-control" <?php if(isset($stu)){ ?> value ="<?= $stu->getColumnValue('masv') ?>" <?php }else{ ?> placeholder="Mã sinh viên" <?php } ?> id="masv"> -->
-                    <?php if(isset($stu)){ ?>
-                      <select class="form-control" id="stu_id" disabled>
-                        <?php foreach($list as $s){ 
-                            if($stu->getColumnValue('student_id') == $s->getColumnValue('id')){
-                          ?>
-                          <option value="<?= $s->getColumnValue('id') ?>" selected><?= $s->getColumnValue('masv') ?> - <?= $s->getColumnValue('fullname') ?></option>
-                         
-                        <?php }else{
-                          ?>
-                          <option value="<?= $s->getColumnValue('id') ?>"><?= $s->getColumnValue('masv') ?> - <?= $s->getColumnValue('fullname') ?></option>
-                          <?php
-                        }
-                        } ?>
-                      </select>
 
-                      <?php }else{ ?>
-
-                    <select class="form-control" id="stu_id">
+                    <select class="form-control" id="stu_id" onchange="fetch_data()">
                       <?php foreach($list as $s){ ?>
                         
 
@@ -72,35 +55,30 @@ mixscript('AOS.init();');
                        
                       <?php } ?>
                     </select>
-                    <?php } ?>
 
                   </div>
                   <div class="form-group">
-                    <label for="cnpm">Công nghệ phần mềm:</label>
-                    <input type="number" step="0.1" class="form-control" <?php if(isset($stu)){ ?> value ="<?= $stu->getColumnValue('cnpm') ?>" <?php } ?>  id="cnpm">
+                    <label for="sb">Môn học:</label>
+                    <select class="form-control" id="sb" onchange="fetch_data()">
+                      <?php foreach($sb as $sba){ ?>
+                        
+
+                        <option value="<?= $sba->getColumnValue('id') ?>"><?= $sba->getColumnValue('name') ?></option>
+                       
+                      <?php } ?>
+                    </select>
                   </div>
-                  <div class="form-group">
-                    <label for="ttnt">Trí tuệ nhân tạo:</label>
-                    <input type="number" step="0.1" class="form-control" <?php if(isset($stu)){ ?> value ="<?= $stu->getColumnValue('ttnt') ?>" <?php } ?>  id="ttnt">
+                  <div class="form-group" id="isData">
+                    <label for="diemmonhoc">Điểm môn học:</label>
+                    <input type="number" step="0.1" class="form-control" id="diemmonhoc" <?php if(isset($stu)){ ?> value ="<?= $stu->getColumnValue('csdl') ?>" <?php } ?>>
                   </div>
-                  <div class="form-group">
-                    <label for="qtm">Quản trị mạng:</label>
-                    <input type="number" step="0.1" class="form-control" <?php if(isset($stu)){ ?> value ="<?= $stu->getColumnValue('qtm') ?>" <?php } ?> id="qtm">
+                  <div class="form-group" id="noneData" style="display: none">
+                    <label for="themdiemmonhoc">Thêm điểm môn học:</label>
+                    <input type="number" step="0.1" class="form-control" id="themdiemmonhoc" >
                   </div>
-                  <div class="form-group">
-                    <label for="tanc">Tiếng anh nâng cao:</label>
-                    <input type="number" step="0.1" class="form-control" <?php if(isset($stu)){ ?> value ="<?= $stu->getColumnValue('tanc') ?>" <?php } ?> id="tanc">
-                  </div>
-                  <div class="form-group">
-                    <label for="csdl">Cơ sở dữ liệu:</label>
-                    <input type="number" step="0.1" class="form-control" <?php if(isset($stu)){ ?> value ="<?= $stu->getColumnValue('csdl') ?>" <?php } ?> id="csdl">
-                  </div>
-                  <div class="form-group">
-                    <label for="btht">Bảo trì hệ thống:</label>
-                    <input type="number" step="0.1" class="form-control" <?php if(isset($stu)){ ?> value ="<?= $stu->getColumnValue('btht') ?>" <?php } ?> id="btht">
-                  </div>
+                 
       
-                  <button type="submit" id="submit" class="btn btn-primary"><?php if(isset($stu)){ ?>Update <?php }else{ ?> Submit <?php } ?></button>
+                  <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                 </form>
                 </div>
             </div>
@@ -108,80 +86,6 @@ mixscript('AOS.init();');
 
           </div>
 
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Content Column -->
-            <div class="col-lg-12 mb-12">
-
-              <!-- Project Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                </div>
-                <div class="card-body" >
-                  <div class="table-responsive">
-                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Mã sinh viên</th>
-                      <th>Công nghệ phần mềm</th>
-                      <th>Trí tuệ nhân tạo</th>
-                      <th>Quản trị mạng</th>
-                      <th>Tiếng anh nâng cao</th>
-                      <th>Cơ sở dữ liệu</th>
-                      <th>Bảo trì hệ thống</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Mã sinh viên</th>
-                      <th>Công nghệ phần mềm</th>
-                      <th>Trí tuệ nhân tạo</th>
-                      <th>Quản trị mạng</th>
-                      <th>Tiếng anh nâng cao</th>
-                      <th>Cơ sở dữ liệu</th>
-                      <th>Bảo trì hệ thống</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <?php foreach($ls as $point){ ?>
-                    <tr>
-                      <td><a href="point@<?= $point->getColumnValue('id') ?>"><?= $point->getColumnValue('id') ?></a></td>
-     
-                      <td>
-                        <a href="student@<?= $point->getColumnValue('student_id') ?>">
-                          <?php 
-                          foreach ($list as $s) {
-                            if($s->getColumnValue('id') == $point->getColumnValue('student_id')){
-                                echo $s->getColumnValue('masv').' - '.$s->getColumnValue('fullname');
-                            } 
-                          }
-
-                          ?></a>
-                    </td>
-
-                      <td><?= $point->getColumnValue('cnpm') ?> - <?= pointAlpha($point->getColumnValue('cnpm')) ?> </td>
-                      <td><?= $point->getColumnValue('ttnt') ?> - <?= pointAlpha($point->getColumnValue('ttnt')) ?> </td>
-                      <td><?= $point->getColumnValue('qtm') ?> - <?= pointAlpha($point->getColumnValue('qtm')) ?> </td>
-                      <td><?= $point->getColumnValue('tanc') ?> - <?= pointAlpha($point->getColumnValue('tanc')) ?> </td>
-                      <td><?= $point->getColumnValue('csdl') ?> - <?= pointAlpha($point->getColumnValue('csdl')) ?> </td>
-                      <td><?= $point->getColumnValue('btht') ?> - <?= pointAlpha($point->getColumnValue('btht')) ?> </td>
-                    </tr>
-                  <?php } ?>
-                    
-                  </tbody>
-                </table>
-              </div>
-                </div>
-              </div>
-
-
-            </div>
-
-          </div>
 
         </div>
 
@@ -194,51 +98,166 @@ mixscript('AOS.init();');
 </a>
 
 <script>
-  $(document).ready(() =>{
-    $('#submit').on('click',(e)=>{
-      e.preventDefault();
+  function fetch_data(){
       $.ajax({
-        url: <?php if(isset($stu)){ ?>'point/update' <?php }else{ ?> 'point/add' <?php } ?>,
+        url: 'point/get',
         type: 'POST',
         data: {
-          <?php if(isset($stu)){ ?> id: '<?= $stu->getColumnValue('id') ?>', <?php } ?>
           student_id: $('#stu_id :selected').val(),
-          cnpm: $('#cnpm').val(),
-          ttnt: $('#ttnt').val(),
-          qtm: $('#qtm').val(),
-          tanc: $('#tanc').val(),
-          csdl: $('#csdl').val(),
-          btht: $('#btht').val(),
+          point_id: $('#sb :selected').val(),
+        }
+      }).done((result)=>{
+        console.log(result);
+        result = JSON.parse(result);
+        if(result.value_point == null){
+          $('#isData').attr('style','display: none');
+          $('#noneData').attr('style','');
+          $('#diemmonhoc').val(result.value_point);
+          $('#themdiemmonhoc').val(null);
+        }else{
+          $('#diemmonhoc').val(result.value_point);
+          $('#isData').attr('style','');
+          $('#noneData').attr('style','display: none');
+        }
+        
+      });
+    }
+  function push_data(data){
+      $.ajax({
+        url: 'point/add',
+        type: 'POST',
+        data: {
+          student_id: data.student_id,
+          point_id: data.point_id,
+          value_point: data.value_point,
+        }
+      }).done((result)=>{
+        console.log(result);
+        result = JSON.parse(result);
+        if(result.status == true){
+          $.notify({
+                icon: 'pe-7s-gift',
+                message: 'Thêm thành công'
+                },{
+              type: 'success',
+              timer: 4000
+          });
+        }else{
+          $.notify({
+                icon: 'pe-7s-gift',
+                message: 'Đã tồn tại'
+                },{
+              type: 'danger',
+              timer: 4000
+          });
+        }
+        
+      });
+  }
+  function push_update_data(data){
+      $.ajax({
+        url: 'point/update',
+        type: 'POST',
+        data: {
+          student_id: data.student_id,
+          point_id: data.point_id,
+          value_point: data.value_point,
         }
       }).done((result)=>{
         result = JSON.parse(result);
-          if(result.status == true){
-            $.notify({
-              icon: 'pe-7s-gift',
-              message: <?php if(isset($stu)){ ?> "Cập nhật thành công" <?php }else{ ?> "Thêm thành công" <?php } ?>
-              },{
-            type: 'success',
-            timer: 4000
-        });
-            setTimeout(function() {
-                location.reload();
-            },4000);
-            console.log(result);
-
-          }else{
-            $.notify({
-              icon: 'pe-7s-gift',
-              message: "Trùng mã sinh viên"
-              },{
-            type: 'danger',
-            timer: 4000
-        });
-            
-          }
+        if(result.status == true){
+          $.notify({
+                icon: 'pe-7s-gift',
+                message: 'cập nhật thành công'
+                },{
+              type: 'success',
+              timer: 4000
+          });
+        }else{
+          $.notify({
+                icon: 'pe-7s-gift',
+                message: 'Đã tồn tại'
+                },{
+              type: 'danger',
+              timer: 4000
+          });
+        }
           
-          console.log(result);
-      });
+        });
+  }
+
+  $(document).ready(() =>{
+    fetch_data();
+    $('#submit').on('click',(e)=>{
+      e.preventDefault();
+      if($('#diemmonhoc').val() == ''){
+        var data = {
+          student_id: $('#stu_id :selected').val(),
+          point_id: $('#sb :selected').val(),
+          value_point: $('#themdiemmonhoc').val(),
+        };
+        push_data(data);
+      }else{
+        var data = {
+          student_id: $('#stu_id :selected').val(),
+          point_id: $('#sb :selected').val(),
+          value_point: $('#diemmonhoc').val(),
+        };
+        
+        push_update_data(data);
+      }
     });
+
+
+    
+      
+
+
+
+
+
+
+    // $('#submit').on('click',(e)=>{
+    //   e.preventDefault();
+    //   $.ajax({
+    //     url: <?php if(isset($stu)){ ?>'point/update' <?php }else{ ?> 'point/add' <?php } ?>,
+    //     type: 'POST',
+    //     data: {
+    //       <?php if(isset($stu)){ ?> id: '<?= $stu->getColumnValue('id') ?>', <?php } ?>
+    //       student_id: $('#stu_id :selected').val(),
+    //       point_id: $('#sb :selected').val(),
+    //       value: $('#diemmonhoc').val(),
+
+    //     }
+    //   }).done((result)=>{
+    //     result = JSON.parse(result);
+    //       if(result.status == true){
+    //         $.notify({
+    //           icon: 'pe-7s-gift',
+    //           message: <?php if(isset($stu)){ ?> "Cập nhật thành công" <?php }else{ ?> "Thêm thành công" <?php } ?>
+    //           },{
+    //         type: 'success',
+    //         timer: 4000
+    //     });
+    //         setTimeout(function() {
+    //             location.reload();
+    //         },4000);
+    //         console.log(result);
+
+    //       }else{
+    //         $.notify({
+    //           icon: 'pe-7s-gift',
+    //           message: "Điểm đã tồn tại"
+    //           },{
+    //         type: 'danger',
+    //         timer: 4000
+    //     });
+            
+    //       }
+          
+    //       console.log(result);
+    //   });
+    // });
 
 
   });

@@ -235,54 +235,20 @@ componentHeader($textheading);
                                         
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                      <?php foreach ($subject as $value) {
+                                        ?>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Công nghệ phần mềm:</label>
+                                                <label><?= $value->getColumnValue('name') ?>:</label>
                                             </div>
-                                            <div class="col-md-6" id="cnpm">
+                                            <div class="col-md-6 " id="subject<?= $value->getColumnValue('id') ?>"  data-id="<?= $value->getColumnValue('id') ?>">
                                                 
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Trí tuệ nhân tạo:</label>
-                                            </div>
-                                            <div class="col-md-6" id="ttnt">
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Quản trị mạng:</label>
-                                            </div>
-                                            <div class="col-md-6" id="qtm">
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Tiếng anh nâng cao:</label>
-                                            </div>
-                                            <div class="col-md-6" id="tanc">
-                                               
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Cơ sở dữ liệu:</label>
-                                            </div>
-                                            <div class="col-md-6" id="csdl">
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Bảo trì hệ thống:</label>
-                                            </div>
-                                            <div class="col-md-6" id="btht">
-                                                
-                                            </div>
-                                        </div>
+                                        <?php
+                                      } ?>
+                                        
+                                        
                                 <!-- <div class="row">
                                     <div class="col-md-12">
                                         <label>Your Bio</label><br/>
@@ -319,13 +285,23 @@ componentHeader($textheading);
                         $('#fullname_tl').html('<p>'+result.student.fullname+'</p>');
                         $('#location_tl').html('<p>'+result.student.location+'</p>');
                         $('#dateday').html('<p>'+result.student.birthday+'</p>');
-                        $('#cnpm').html('<p>'+result.point.cnpm+'</p>');
-                        $('#ttnt').html('<p>'+result.point.ttnt+'</p>');
-                        $('#qtm').html('<p>'+result.point.qtm+'</p>');
-                        $('#tanc').html('<p>'+result.point.tanc+'</p>');
-                        $('#csdl').html('<p>'+result.point.csdl+'</p>');
-                        $('#btht').html('<p>'+result.point.btht+'</p>');
-
+                        $('.subject').attr('data-name',result.student.id);
+                        <?php foreach ($subject as $value) {
+                          ?>
+                        $.ajax({
+                              url: 'point/getfont',
+                              type: 'POST',
+                              data: {
+                                student_id: result.student.id,
+                                point_id: <?= $value->getColumnValue('id') ?>,
+                              }
+                            }).done((result)=>{
+                                console.log(result);
+                                result = JSON.parse(result);
+                                $('#subject<?= $value->getColumnValue('id') ?>').html('<p>'+result.value_point+' - '+result.point_alpha+'</p>');
+                            });
+                          <?php
+                         } ?>
                     });
               }
             });
