@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 28, 2020 lúc 09:03 PM
+-- Thời gian đã tạo: Th6 03, 2020 lúc 11:13 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -40,6 +40,26 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (1, 'Tuyển sinh - việc làm'),
 (2, 'Sự kiện'),
 (4, 'Góc sinh viên');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `list_point`
+--
+
+CREATE TABLE `list_point` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `list_point`
+--
+
+INSERT INTO `list_point` (`id`, `name`) VALUES
+(1, 'Công nghệ phần mềm (c#)'),
+(3, 'Lập trình hướng đối tượng java'),
+(4, 'Lập trình vi xử lý');
 
 -- --------------------------------------------------------
 
@@ -120,6 +140,36 @@ INSERT INTO `student` (`id`, `masv`, `fullname`, `birthday`, `image`, `location`
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `st_point`
+--
+
+CREATE TABLE `st_point` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `point_id` int(11) NOT NULL,
+  `value_point` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `st_point`
+--
+
+INSERT INTO `st_point` (`id`, `student_id`, `point_id`, `value_point`) VALUES
+(1, 14, 1, 7.9),
+(3, 14, 3, 5.5),
+(8, 15, 1, 7.1),
+(9, 14, 4, 4.2),
+(10, 14, 1, 8.2),
+(11, 14, 1, 8.8),
+(12, 14, 1, 9.3),
+(13, 14, 1, 8.9),
+(14, 14, 1, 8.9),
+(16, 15, 4, 2.1),
+(17, 15, 3, 3.4);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `tbuser`
 --
 
@@ -168,6 +218,13 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `list_point`
+--
+ALTER TABLE `list_point`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
 -- Chỉ mục cho bảng `point`
 --
 ALTER TABLE `point`
@@ -189,6 +246,14 @@ ALTER TABLE `student`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `masv` (`masv`),
   ADD UNIQUE KEY `masv_2` (`masv`);
+
+--
+-- Chỉ mục cho bảng `st_point`
+--
+ALTER TABLE `st_point`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `point_id` (`point_id`);
 
 --
 -- Chỉ mục cho bảng `tbuser`
@@ -214,6 +279,12 @@ ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT cho bảng `list_point`
+--
+ALTER TABLE `list_point`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT cho bảng `point`
 --
 ALTER TABLE `point`
@@ -230,6 +301,12 @@ ALTER TABLE `post`
 --
 ALTER TABLE `student`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `st_point`
+--
+ALTER TABLE `st_point`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `tbuser`
@@ -259,6 +336,13 @@ ALTER TABLE `point`
 ALTER TABLE `post`
   ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_create`) REFERENCES `tbuser` (`id`),
   ADD CONSTRAINT `post_ibfk_2` FOREIGN KEY (`cate_post`) REFERENCES `category` (`id`);
+
+--
+-- Các ràng buộc cho bảng `st_point`
+--
+ALTER TABLE `st_point`
+  ADD CONSTRAINT `st_point_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),
+  ADD CONSTRAINT `st_point_ibfk_2` FOREIGN KEY (`point_id`) REFERENCES `list_point` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
